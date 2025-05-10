@@ -1,4 +1,5 @@
 #include "LPC17xx.h"
+#include "GLCD.h"
 
 #define SIMULATION 
 
@@ -24,7 +25,7 @@ volatile int DETECED_FALLING_EDGE = 0, DETECTED_RISING_EDGE = 0;
 volatile int NEW_BUTTON_STATE = 0, OLD_BUTTON_STATE = 0;
 volatile int BUTTON_PULSE_WIDTH = 0;
 
-volatile State PREVIOUS_STATE = STATE_OFF, CURRENT_STATE = STATE_OFF;
+volatile State PREVIOUS_STATE = STATE_OFF, CURRENT_STATE = STATE_OFF, PRINTED_STATE = STATE_OFF;
 
 void debounce_button(void) {
     int rising_edge = 0, falling_edge = 0;
@@ -79,19 +80,22 @@ int update_state_machine(void) {
 }
 
 void handle_state_transition(void) {
-    int leds_state = LPC_GPIO2->FIOPIN & LED_PINS; // Read the led pin state
+    int leds_state = 0;
     
     switch(CURRENT_STATE) {
         case STATE_OFF: 
             LPC_GPIO2->FIOCLR = LED_PINS; // Disable all the LEDs
             break;
         case STATE_LEFT: 
-            if (leds_state) break;          // If there is already a LED on, just keep it.
-            LPC_GPIO2->FIOSET = PIN_LED(0); // Enable the first LED to start the process.
+
+            leds_state = LPC_GPIO2->FIOPIN & LED_PINS; // Read the led pin state
+            if (leds_state) break;                     // If there is already a LED on, just keep it.
+            LPC_GPIO2->FIOSET = PIN_LED(0);            // Enable the first LED to start the process.
             break;
         case STATE_RIGHT:
-            if (leds_state) break;          // If there is already a LED on, just keep it.
-            LPC_GPIO2->FIOSET = PIN_LED(7); // Enable the last LED to start the process.
+            leds_state = LPC_GPIO2->FIOPIN & LED_PINS; // Read the led pin state
+            if (leds_state) break;                     // If there is already a LED on, just keep it.
+            LPC_GPIO2->FIOSET = PIN_LED(7);            // Enable the last LED to start the process.
             break;
     }
 }
@@ -105,7 +109,7 @@ void handle_current_state(void) {
             break;
         case STATE_LEFT: 
             LPC_GPIO2->FIOCLR = LED_PINS; // Disable all active LEDs
-        
+            
             if(leds_state & PIN_LED(7)) {
                 // In this case only the last LED is on.
                 LPC_GPIO2->FIOSET = PIN_LED(0); // Set the first one, to repeat the pattern
@@ -117,7 +121,7 @@ void handle_current_state(void) {
             break;
         case STATE_RIGHT: 
             LPC_GPIO2->FIOCLR = LED_PINS; // Disable all active LEDs
-        
+            
             if(leds_state & PIN_LED(0)) {
                 // In this case only the last LED is on.
                 LPC_GPIO2->FIOSET = PIN_LED(7); // Set the last one, to repeat the pattern
@@ -133,11 +137,24 @@ void handle_current_state(void) {
 void SysTick_Handler(void) {
     debounce_button();
     
-    if(update_state_machine()) {
+      if(update_state_machine()) {
         handle_state_transition();
     } else {
         handle_current_state();
     }
+}
+
+void init_glcd(void) {
+    GLCD_Init();              // Initialize the GLCD
+    GLCD_Clear(White);        // Clear the GLCD
+    GLCD_SetTextColor(Black); // Set the text color
+}
+
+void init_gpio(void) {
+    LPC_GPIO2->FIODIR &= ~PIN_BUTTON; // Set the button pin to be an input (1 = output, 0 = input)
+    LPC_GPIO2->FIODIR |= LED_PINS;    // Set the LED pins (0..7) to be an output
+    
+    LPC_GPIO2->FIOCLR = LED_PINS;     // Disable all the LEDs
 }
 
 void init_systick(void) {
@@ -151,16 +168,35 @@ void init_systick(void) {
     SysTick->CTRL |= (1 << 0);    // Turns the counter on        
 }
 
-void init_gpio(void) {
-    LPC_GPIO2->FIODIR &= ~PIN_BUTTON; // Set the button pin to be an input (1 = output, 0 = input)
-    LPC_GPIO2->FIODIR |= LED_PINS;    // Set the LED pins (0..7) to be an output
-    
-    LPC_GPIO2->FIOCLR = LED_PINS;     // Disable all the LEDs
-}
-
 int main(void) {
-    init_systick();
-    init_gpio();
+    int old_leds_state = 0;
+    int changed_state = 0;
     
-    while(1);
+    init_glcd(); // Always first initialize the display, as it takes some time.
+    
+    // Then print the text once, as it won't change anymore.
+    GLCD_DisplayString(0, 0, "EMB Lab 1 Lauflicht");
+    GLCD_DisplayString(1, 0, "GPIO / Timer / INT");
+    
+    init_gpio();    // Initialize the GPIO Pins after glcd and before systick, so everything works as expected.
+    init_systick(); // Lastly initialize systick to start the overall process.
+    
+    while(1) {
+        changed_state = (PRINTED_STATE != CURRENT_STATE);
+        if(!changed_state) continue;
+        PRINTED_STATE = CURRENT_STATE;
+            
+        old_leds_state = LPC_GPIO2->FIOPIN & LED_PINS; // Read the led pin state
+        
+        if(CURRENT_STATE == STATE_OFF) {
+          GLCD_DisplayString(3, 0, "LEDs OFF");
+        } else if(CURRENT_STATE == STATE_LEFT) {
+          GLCD_DisplayString(3, 0, "LEDs ON Left");
+        } else if(CURRENT_STATE == STATE_RIGHT) {
+          GLCD_DisplayString(3, 0, "LEDs ON Right");
+        }      
+            
+        LPC_GPIO2->FIOCLR = LED_PINS;       // Disable all the LEDs
+        LPC_GPIO2->FIOSET = old_leds_state; // Restore the old LEDs
+    }
 }

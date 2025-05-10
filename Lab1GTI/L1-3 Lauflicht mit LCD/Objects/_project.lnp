@@ -1,5 +1,6 @@
 --cpu Cortex-M3
 ".\objects\lauflicht.o"
+".\objects\glcd_lpc1700.o"
 ".\objects\startup_lpc17xx.o"
 ".\objects\system_lpc17xx.o"
 --strict --scatter ".\Objects\_project.sct"

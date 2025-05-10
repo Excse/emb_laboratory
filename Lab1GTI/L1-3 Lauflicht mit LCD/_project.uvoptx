@@ -187,7 +187,7 @@
         <aSer3>0</aSer3>
         <eProf>0</eProf>
         <aLa>1</aLa>
-        <aPa1>0</aPa1>
+        <aPa1>1</aPa1>
         <AscS4>0</AscS4>
         <aSer4>0</aSer4>
         <StkLoc>0</StkLoc>
@@ -212,7 +212,7 @@
         <Wi>
           <IntNumber>0</IntNumber>
           <FirstString>((PORT2 &amp; 0x00000400) &gt;&gt; 10 &amp; 0x400) &gt;&gt; 10</FirstString>
-          <SecondString>FF00000000000000000000000000E0FFFFFFEF410100000000000000000000000000000028504F5254322026203078303030303034303029203E3E2031300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000F03F1600000000000000000000000000000000000000E0020000</SecondString>
+          <SecondString>FF00000000000000000000000000E0FFFFFFEF410100000000000000000000000000000028504F5254322026203078303030303034303029203E3E2031300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000F03F1700000000000000000000000000000000000000E0020000</SecondString>
         </Wi>
       </LogicAnalyzers>
       <DebugDescription>
@@ -252,6 +252,54 @@
       <bDave2>0</bDave2>
       <PathWithFileName>.\Lauflicht.c</PathWithFileName>
       <FilenameWithoutPath>Lauflicht.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>3</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\font.h</PathWithFileName>
+      <FilenameWithoutPath>font.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>4</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\Font_24x16.h</PathWithFileName>
+      <FilenameWithoutPath>Font_24x16.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>5</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\GLCD.h</PathWithFileName>
+      <FilenameWithoutPath>GLCD.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>6</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\GLCD_LPC1700.c</PathWithFileName>
+      <FilenameWithoutPath>GLCD_LPC1700.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

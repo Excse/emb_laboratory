@@ -393,6 +393,26 @@
               <FileType>1</FileType>
               <FilePath>.\Lauflicht.c</FilePath>
             </File>
+            <File>
+              <FileName>font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\font.h</FilePath>
+            </File>
+            <File>
+              <FileName>Font_24x16.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Font_24x16.h</FilePath>
+            </File>
+            <File>
+              <FileName>GLCD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\GLCD.h</FilePath>
+            </File>
+            <File>
+              <FileName>GLCD_LPC1700.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GLCD_LPC1700.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
