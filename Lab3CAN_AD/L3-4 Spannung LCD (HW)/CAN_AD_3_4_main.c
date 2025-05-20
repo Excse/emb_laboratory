@@ -25,56 +25,56 @@ char NewLine[21], AD_Val_String[6];
 
 int main(void)
 {
-	GLCD_Init();                                    /* Initialize the GLCD */
-	GLCD_Clear(White);                              /* Clear the GLCD */
+    GLCD_Init();                                    /* Initialize the GLCD */
+    GLCD_Clear(White);                              /* Clear the GLCD */
   GLCD_SetBackColor(Blue);                        /* Set the Back Color */
   GLCD_SetTextColor(White);                       /* Set the Text Color */
-	
-	GLCD_DisplayString(0, 0, "  EMB Lab3: CAN/ADC ");/* print string to LCD */
-	sprintf(NewLine, "   Local ID: %#3x  ", My_CAN_ID);
-	GLCD_DisplayString(1, 0, (unsigned char *) NewLine);/* print string to LCD */
-	GLCD_DisplayString(2, 0, "Local ADValue:");	
-	
-	Timer1_Config();
-	ADC_Config();
+    
+    GLCD_DisplayString(0, 0, "  EMB Lab3: CAN/ADC ");/* print string to LCD */
+    sprintf(NewLine, "   Local ID: %#3x  ", My_CAN_ID);
+    GLCD_DisplayString(1, 0, (unsigned char *) NewLine);/* print string to LCD */
+    GLCD_DisplayString(2, 0, "Local ADValue:");    
+    
+    Timer1_Config();
+    ADC_Config();
   ADC_StartConversion();
-	
-	AD_New_Value_Ready = 0;
-	
-	while (1) 
-		{
-			if(AD_New_Value_Ready)
-				{
-					GLCD_SetBackColor(Blue);                        /* Set the Back Color */
-					GLCD_SetTextColor(White);                       /* Set the Text Color */
-		  		    /*************************************************/
-					//Put some code here
-					//
-					//
-					/************************************************/
-					AD_New_Value_Ready = 0;
-				}
-		}
+    
+    AD_New_Value_Ready = 0;
+    
+    while (1) 
+        {
+            if(AD_New_Value_Ready)
+                {
+                    GLCD_SetBackColor(Blue);                        /* Set the Back Color */
+                    GLCD_SetTextColor(White);                       /* Set the Text Color */
+                      /*************************************************/
+                    //Put some code here
+                    //
+                    //
+                    /************************************************/
+                    AD_New_Value_Ready = 0;
+                }
+        }
 }
 
 void Timer1_Config(void)
 {
-		  		    /*************************************************/
-					//Put some code here
-					//
-					//
-					/************************************************/
+                      /*************************************************/
+                    //Put some code here
+                    //
+                    //
+                    /************************************************/
 }
 
 
 void TIMER1_IRQHandler (void) 
 {  
-	uint16_t AD_Value;
-			  		    /*************************************************/
-					//Put some code here
-					//
-					//
-					/************************************************/
+    uint16_t AD_Value;
+                          /*************************************************/
+                    //Put some code here
+                    //
+                    //
+                    /************************************************/
 
 }
 
