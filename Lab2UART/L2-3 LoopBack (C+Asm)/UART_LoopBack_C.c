@@ -2,22 +2,26 @@
 #include <stdio.h>
 #include <LPC17xx.H>  
 
-// Put some lines here  e.g. DEFINE ...
+#define INVALID_CHAR 0xFFFFFFFF
+#define UART_PORT    0x0000
+#define UART_DL      0x000B
+#define UART_FDR_LCR 0xD303
+#define UART_IER_FCR 0x0007
 
-unsigned char MyChar;
-unsigned int PortNum, UDL, FDRvalue, UART_mode, IntEnableValue, FIFO_mode, Temp;
-// PortNum = Port Number excepted to be 0 or 2 for the the LandTiger EVB
-// UDL = U_DLM*256 + U_DLL to set the data rate
-// FDRvalue  = Content of the register UxFDR (Fractional Divider)
-// UART_mode = Content of the register UxLCR without the DLAB bit
-// IntEnableValue = Content of the register UxIER
-// FIFO_mode = Content of the register UxFCR (FIFO Control Register)
+extern void UART_init(int UART_PortNum, int UxDL, int UxFDR_LCR, int UxIER_FCR);
 
+extern void UART_PutChar(int UART_PortNum, char Char);
 
+extern char UART_GetChar(int UART_PortNum);
 
 int main(void){
-
-// Put your code here
-
+    UART_init(UART_PORT, UART_DL, UART_FDR_LCR, UART_IER_FCR);
+    
+    while(1) {
+        char read = UART_GetChar(UART_PORT);
+        if(read == INVALID_CHAR) continue;
+        
+        UART_PutChar(UART_PORT, read);
+    }
 }
 
