@@ -473,9 +473,9 @@ void init_SysTick(void){
 **
 *****************************************************************************/
 void init_Timer0_for_UART(void) {
-    // Put your code here:
-    //  :
-
+	LPC_TIM0->MR0 = LCDout_ZeitDauer_Sek * 25000000; // Zeit[s] * 25MHz = Cycles
+	LPC_TIM0->MCR = (1 << 0) | (1 << 1);             // MR0I + MR0R
+	LPC_TIM0->TCR = 1;                               // Timer starten
 } // end of init_Timer0_for_UART
 
 
@@ -505,8 +505,13 @@ void init_Timer2(void){
 **
 *****************************************************************************/
 void init_NVIC(void){        // Interrupt enable
-    // Put your code here:
-    //  :
-
+	NVIC_SetPriority(TIMER0_IRQn, 3);
+	NVIC_EnableIRQ(TIMER0_IRQn);
+	
+	NVIC_SetPriority(UART0_IRQn, 2);
+	NVIC_EnableIRQ(UART0_IRQn);
+	
+	NVIC_SetPriority(UART2_IRQn, 2);
+	NVIC_EnableIRQ(UART2_IRQn);
 } //end of init_NVIC
 
