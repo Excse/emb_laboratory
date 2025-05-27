@@ -79,8 +79,8 @@
       </OPTFL>
       <CpuCode>8</CpuCode>
       <DebugOpt>
-        <uSim>1</uSim>
-        <uTrg>0</uTrg>
+        <uSim>0</uSim>
+        <uTrg>1</uTrg>
         <sLdApp>1</sLdApp>
         <sGomain>1</sGomain>
         <sRbreak>1</sRbreak>
@@ -144,32 +144,32 @@
           <Type>0</Type>
           <LineNumber>172</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>5870</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\UART_api.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\_project\UART_api.c\172</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
           <LineNumber>93</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>5466</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\UART_api.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\_project\UART_api.c\93</Expression>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <ToolboxButtons>
