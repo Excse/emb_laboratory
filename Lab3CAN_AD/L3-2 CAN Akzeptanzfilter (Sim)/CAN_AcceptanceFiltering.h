@@ -10,7 +10,7 @@ const uint16_t  CAN1_Array_FullCAN_IDs[CAN1_Number_FullCAN_ID] = {0x01, 05};
 
 /**********  Änderbare Stellen im Rahmen des EMB Laborversuchs  CAN/AD ********************/
 const uint32_t  CAN1_Number_SFF_EXP_ID = 2;
-const uint16_t  CAN1_Array_SFF_EXP_IDs[CAN1_Number_SFF_EXP_ID] = {0x701, 0x0705};
+const uint16_t  CAN1_Array_SFF_EXP_IDs[CAN1_Number_SFF_EXP_ID] = {0xFC, 0xFD};
 /******************************************************************************/
 
 const uint32_t  CAN1_Number_GRP_SFF_ID =2;
