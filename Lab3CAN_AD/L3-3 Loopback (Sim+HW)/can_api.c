@@ -638,4 +638,3 @@ uint32_t CAN_Set_Acceptance_LUT_RAM(uint32_t  ACF_Mode)
     return New_CAN_RX_Data_Stored;    
                 
 }
- 
